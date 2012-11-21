@@ -1,5 +1,7 @@
 /** Add css rules here for your application. */
-
+body {
+	background: #FFF;
+}
 
 /** Example rules used by the template application (remove for your app) */
 h1 {
@@ -12,7 +14,10 @@ h1 {
 
 #wrapper {
 	width:960px;
+	min-height:1000px;
 	margin:auto;
+	background-color:#DDD;
+	dis
 }
 
 .sendButton {
@@ -23,6 +28,20 @@ h1 {
 /** Most GWT widgets already have a style name defined */
 .gwt-DialogBox {
   width: 400px;
+}
+
+#imageContainer {
+	float: left;
+	margin: 50px;
+}
+
+#personSelectionContainer {
+	padding: 50px 0;
+}
+
+.gwt-RadioButton {
+	display: block;
+	padding-left: 20px;
 }
 
 .dialogVPanel {
