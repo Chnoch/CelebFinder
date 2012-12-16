@@ -1,20 +1,60 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee                http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
   <!-- Servlets -->
+<!--   <SERVLET> -->
+<!--     <SERVLET-NAME>GREETSERVLET</SERVLET-NAME> -->
+<!--     <SERVLET-CLASS>CH.UNIBE.MCS.CELEBFINDER.SERVER.GREETINGSERVICEIMPL</SERVLET-CLASS> -->
+<!--   </SERVLET> -->
+  
+<!--   <SERVLET-MAPPING> -->
+<!--     <SERVLET-NAME>GREETSERVLET</SERVLET-NAME> -->
+<!--     <URL-PATTERN>/CELEBFINDER/GREET</URL-PATTERN> -->
+<!--   </SERVLET-MAPPING> -->
+ 
   <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>ch.unibe.mcs.celebfinder.server.GreetingServiceImpl</servlet-class>
+    <servlet-name>uploadImage</servlet-name>
+    <servlet-class>ch.unibe.mcs.celebfinder.server.UploadImageServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/celebfinder/greet</url-pattern>
+    <servlet-name>uploadImage</servlet-name>
+    <url-pattern>/uploadImage</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>randomImage</servlet-name>
+    <servlet-class>ch.unibe.mcs.celebfinder.server.RandomImageServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>randomImage</servlet-name>
+    <url-pattern>/randomImage</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>suggestName</servlet-name>
+    <servlet-class>ch.unibe.mcs.celebfinder.server.SuggestNameServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>suggestName</servlet-name>
+    <url-pattern>/suggestName</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>getImage</servlet-name>
+    <servlet-class>ch.unibe.mcs.celebfinder.server.GetImageServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>getImage</servlet-name>
+    <url-pattern>/getImage</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->
-  <welcome-file-list>
-    <welcome-file>CelebFinder.html</welcome-file>
-  </welcome-file-list>
+<!--   <welcome-file-list> -->
+<!--     <welcome-file>CelebFinder.html</welcome-file> -->
+<!--   </welcome-file-list> -->
 
   <servlet>
     <servlet-name>SystemServiceServlet</servlet-name>

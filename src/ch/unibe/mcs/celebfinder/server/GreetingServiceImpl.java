@@ -1,7 +1,8 @@
 package ch.unibe.mcs.celebfinder.server;
 
 import ch.unibe.mcs.celebfinder.client.GreetingService;
-import ch.unibe.mcs.celebfinder.shared.FieldVerifier;
+import ch.unibe.mcs.celebfinder.controller.FieldVerifier;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 /**
