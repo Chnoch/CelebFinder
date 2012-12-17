@@ -17,23 +17,23 @@ public class Person extends Model {
 	private Key key;
 
 	@Persistent
-	private String mFirstName;
-	
+	private String firstName;
+
 	@Persistent
-	private String mLastName;
-	
+	private String lastName;
+
 	@Persistent
-	private URI mLink;
+	private URI link;
 
 	public Person(String firstName, String lastName) {
-		mFirstName = firstName;
-		mLastName = lastName;
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 
 	public Person(String firstName, String lastName, URI link) {
-		mFirstName = firstName;
-		mLastName = lastName;
-		mLink = link;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.link = link;
 	}
 
 	public Key getKey() {
@@ -41,26 +41,36 @@ public class Person extends Model {
 	}
 
 	public String getFirstName() {
-		return mFirstName;
+		return firstName;
 	}
 
 	public void setFirstName(String mFirstName) {
-		this.mFirstName = mFirstName;
+		this.firstName = mFirstName;
 	}
 
 	public String getLastName() {
-		return mLastName;
+		return lastName;
 	}
 
 	public void setLastName(String mLastName) {
-		this.mLastName = mLastName;
+		this.lastName = mLastName;
 	}
 
 	public URI getLink() {
-		return mLink;
+		return link;
 	}
 
 	public void setLink(URI mLink) {
-		this.mLink = mLink;
+		this.link = mLink;
+	}
+
+	public boolean equals(Person other) {
+		if (this.firstName.equals(other.getFirstName()) && this.lastName.equals(other.getLastName())) {
+			return true;
+		} else {return false;}
+	}
+	
+	public String toString() {
+		return this.firstName + " " + this.lastName;
 	}
 }

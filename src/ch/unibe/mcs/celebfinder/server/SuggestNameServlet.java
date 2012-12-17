@@ -14,7 +14,6 @@ import ch.unibe.mcs.celebfinder.model.Candidate;
 import ch.unibe.mcs.celebfinder.model.CelebImage;
 import ch.unibe.mcs.celebfinder.model.Person;
 
-
 public class SuggestNameServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -23,7 +22,7 @@ public class SuggestNameServlet extends HttpServlet {
 		// Get the image representation
 		String firstname = req.getParameter("firstname");
 		String lastname = req.getParameter("lastname");
-		String imageKey = req.getParameter("imageKey");
+		long imageKey = Long.parseLong(req.getParameter("imageKey"));
 
 		List<Person> results = getAvailablePerson(firstname, lastname);
 		CelebImage image = pm.getObjectById(CelebImage.class, imageKey);
@@ -37,20 +36,25 @@ public class SuggestNameServlet extends HttpServlet {
 		Candidate candidate = new Candidate(image, person);
 		image.addCandidate(person);
 
-		image.save();
 		person.save();
 		candidate.save();
+		image.save();
+		pm.close();
 
 		// respond to query
-		resp.setContentType("text/plain");
-		resp.getOutputStream().write("OK!".getBytes());
+		resp.sendRedirect("/UploadImageForm.jsp");
 	}
 
 	private List<Person> getAvailablePerson(String firstname, String lastname) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		Query query = pm.newQuery("select from MyImage "
-				+ "where name = firstnameParam " + "lastname = lastnameParam");
+		try {
+			Query q = pm.newQuery(Person.class, "lastName == '" + lastname
+					+ "'" + " && firstName == '" + firstname + "'");
 
-		return (List<Person>) query.execute(firstname, lastname);
+			List<Person> persons = (List<Person>) q.execute();
+			return persons;
+		} finally {
+			pm.close();
+		}
 	}
 }

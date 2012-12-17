@@ -79,5 +79,9 @@ public class CelebImage extends Model {
 	public Key getKey() {
 		return key;
 	}
+	
+	public List<Person> getCandidates() {
+		return candidates;
+	}
 
 }

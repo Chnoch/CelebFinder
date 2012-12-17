@@ -50,6 +50,15 @@
     <servlet-name>getImage</servlet-name>
     <url-pattern>/getImage</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>imageSelected</servlet-name>
+    <servlet-class>ch.unibe.mcs.celebfinder.server.ImageSelectedServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>imageSelected</servlet-name>
+    <url-pattern>//imageSelected</url-pattern>
+  </servlet-mapping>
   
   <!-- Default page to serve -->
 <!--   <welcome-file-list> -->
