@@ -10,16 +10,29 @@ import javax.jdo.Query;
 import ch.unibe.mcs.celebfinder.model.Person;
 
 public class PersonController {
+	
+	public static List<Person> getAvailablePerson(String firstname, String lastname) {
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		try {
+			Query q = pm.newQuery(Person.class, "lastName == '" + lastname
+					+ "'" + " && firstName == '" + firstname + "'");
+
+			List<Person> persons = (List<Person>) q.execute();
+			return persons;
+		} finally {
+			pm.close();
+		}
+	}
+
 
 	public static List<Person> getRandomPersons(int num, List<Person> forbidden) {
 		List<Person> persons = getAllPersons();
 		List<Person> candidates = new ArrayList<Person>();
-		for (int i = 0; i < num; i++) {
+		persons.removeAll(forbidden);
+		while (candidates.size()<num) {
 			int index = (int) (Math.random() * (double) persons.size());
 			Person candidate = persons.get(index);
-			if (forbidden.contains(candidate) || candidates.contains(candidate)) {
-				i--;
-			} else {
+			if (!candidates.contains(candidate)) {
 				candidates.add(candidate);
 			}
 		}

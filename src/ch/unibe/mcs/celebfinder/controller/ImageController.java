@@ -7,10 +7,8 @@ import java.util.List;
 import javax.jdo.Extent;
 import javax.jdo.FetchGroup;
 import javax.jdo.PersistenceManager;
-import javax.jdo.Query;
 
 import com.google.appengine.api.datastore.Blob;
-import com.google.appengine.api.datastore.Key;
 
 import ch.unibe.mcs.celebfinder.model.Candidate;
 import ch.unibe.mcs.celebfinder.model.CelebImage;
@@ -34,9 +32,20 @@ public class ImageController {
 				images.add(iter.next());
 			}
 
-			int index = (int) (Math.random() * (double) images.size());
-			
-			return images.get(index).getKey().getId();
+			CelebImage image;
+			boolean done = true;
+			do {
+				done = true;
+				int index = (int) (Math.random() * (double) images.size());
+				image = images.get(index);
+				if (image.getCandidates() == null) {
+					done = false;
+				} else if (image.getCandidates().size() == 0) {
+					done = false;
+				}
+			} while (!done);
+
+			return image.getKey().getId();
 		} finally {
 			pm.close();
 		}
@@ -56,8 +65,10 @@ public class ImageController {
 	public static List<Person> getCandidatePersonsFromID(long id) {
 		CelebImage image = getCelebImageFromID(id);
 		List<Person> persons = new ArrayList<Person>();
-		for (Candidate candidate : image.getCandidates()) {
-			persons.add(candidate.getPerson());
+		if (image.getCandidates() != null) {
+			for (Candidate candidate : image.getCandidates()) {
+				persons.add(candidate.getPerson());
+			}
 		}
 		return persons;
 	}

@@ -3,8 +3,11 @@ package ch.unibe.mcs.celebfinder.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.unibe.mcs.celebfinder.controller.UserController;
+
 import com.google.appengine.api.datastore.Blob;
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.users.User;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
@@ -39,19 +42,50 @@ public class CelebImage extends Model {
 	 * @param candidate
 	 */
 	public boolean addCandidate(Person person) {
+		if (person == null) {
+			return false;
+		}
+		int highestScore = 0;
+		boolean found = false;
+		boolean createNew = true;
+		Candidate selectedCandidate = null;
+		if (this.candidates == null) {
+			this.candidates = new ArrayList<Candidate>();
+			createNew = false;
+		}
+
 		for (Candidate candidate : this.candidates) {
-			if (candidate.getPerson().equals(person)) {
-				candidate.addSuggestion();
-				candidate.save();
-				this.save();
+			if (candidate.getSuggestions() > highestScore) {
+				highestScore = candidate.getSuggestions();
+			}
+			if (candidate.getPerson() != null) {
+				if (candidate.getPerson().equals(person)) {
+					candidate.addSuggestion();
+					person.save();
+					candidate.save();
+					this.save();
+					found = true;
+					selectedCandidate = candidate;
+				}
+			}
+		}
+
+		if (found) {
+			if (selectedCandidate.getSuggestions() < highestScore) {
+				return false;
+			} else {
 				return true;
 			}
 		}
 
-		Candidate candidate = new Candidate(this, person);
-		candidates.add(candidate);
-		candidate.save();
-		this.save();
+		if (createNew) {
+			Candidate candidate = new Candidate(this, person);
+
+			candidates.add(candidate);
+			person.save();
+			candidate.save();
+			this.save();
+		}
 		return false;
 	}
 

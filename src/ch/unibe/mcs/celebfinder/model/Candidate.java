@@ -1,6 +1,7 @@
 package ch.unibe.mcs.celebfinder.model;
 
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.datanucleus.annotations.Unowned;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
@@ -8,7 +9,7 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
-@PersistenceCapable(identityType = IdentityType.APPLICATION)
+@PersistenceCapable(identityType = IdentityType.APPLICATION, detachable="true")
 public class Candidate extends Model {
 
 	@PrimaryKey
@@ -19,6 +20,7 @@ public class Candidate extends Model {
 	private CelebImage image;
 
 	@Persistent
+	@Unowned
 	private Person person;
 
 	@Persistent

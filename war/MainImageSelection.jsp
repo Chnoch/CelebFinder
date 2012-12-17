@@ -17,8 +17,7 @@
 	<%
 		long imageId = ImageController.getRandomImageID();
 
-		List<Person> persons = ImageController
-				.getCandidatePersonsFromID(imageId);
+		List<Person> persons = ImageController.getCandidatePersonsFromID(imageId);
 		List<Person> wrongPersons = PersonController.getRandomPersons(
 				4 - persons.size(), persons);
 

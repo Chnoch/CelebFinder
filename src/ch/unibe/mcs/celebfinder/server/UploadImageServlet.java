@@ -15,7 +15,9 @@ import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
 
+import ch.unibe.mcs.celebfinder.controller.UserController;
 import ch.unibe.mcs.celebfinder.model.CelebImage;
+import ch.unibe.mcs.celebfinder.model.CelebUser;
 
 import com.google.appengine.api.datastore.Blob;
 import com.google.appengine.api.datastore.Key;
@@ -23,6 +25,7 @@ import com.google.appengine.api.images.Image;
 import com.google.appengine.api.images.ImagesService;
 import com.google.appengine.api.images.ImagesServiceFactory;
 import com.google.appengine.api.images.Transform;
+import com.google.appengine.api.users.User;
 
 public class UploadImageServlet extends HttpServlet {
 
@@ -47,6 +50,11 @@ public class UploadImageServlet extends HttpServlet {
 			CelebImage image = new CelebImage(imageBlob);
 
 			image.save();
+
+			CelebUser user = UserController.getCelebUserFromAuth((User) req
+					.getSession().getAttribute("user"));
+			if (user != null)
+				user.addScore(5);
 			// Redirect to suggest name form
 			req.setAttribute("imageKey", image.getKey().getId());
 			req.getRequestDispatcher("SuggestNameForm.jsp").forward(req, resp);

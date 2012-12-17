@@ -30,8 +30,12 @@ h1 {
 .navigation {
 	margin-left:auto;
 	margin-right:auto;
-	width:365px;
+	width:570px;
 	padding-bottom: 20px;
+}
+
+.name-form {
+	float:left;
 }
 
 .sendButton {
