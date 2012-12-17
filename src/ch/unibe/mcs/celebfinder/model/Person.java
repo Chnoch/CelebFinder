@@ -3,6 +3,7 @@ package ch.unibe.mcs.celebfinder.model;
 import java.net.URI;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
@@ -64,12 +65,22 @@ public class Person extends Model {
 		this.link = mLink;
 	}
 
-	public boolean equals(Person other) {
-		if (this.firstName.equals(other.getFirstName()) && this.lastName.equals(other.getLastName())) {
-			return true;
-		} else {return false;}
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Person) {
+			Person other = (Person) o;
+			if (this.firstName.equals(other.getFirstName())
+					&& this.lastName.equals(other.getLastName())) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	}
-	
+
+	@Override
 	public String toString() {
 		return this.firstName + " " + this.lastName;
 	}

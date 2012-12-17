@@ -57,7 +57,7 @@
   
   <servlet-mapping>
     <servlet-name>imageSelected</servlet-name>
-    <url-pattern>//imageSelected</url-pattern>
+    <url-pattern>/imageSelected</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->

@@ -2,13 +2,7 @@
 
 <html>
 <head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-
-<link type="text/css" rel="stylesheet" href="CelebFinder.css">
-<title>Web Application Starter Project</title>
-
-<script type="text/javascript" language="javascript"
-	src="celebfinder/celebfinder.nocache.js"></script>
+<jsp:include page="/jsplib/header.jsp" />
 </head>
 
 <body>
@@ -17,11 +11,12 @@
 		style="position: absolute; width: 0; height: 0; border: 0"></iframe>
 
 	<h1>CelebFinder</h1>
+	<jsp:include page="/jsplib/navigation.jsp" />
 	<div id="wrapper">
-		<span>Upload an image right here and gather points</span>
-		<form name="input" action="uploadImage" method="post" enctype="multipart/form-data">
+		<div class="alert alert-info">Upload an image right here and gather points</div>
+		<form name="input" action="uploadImage" method="post" enctype="multipart/form-data" class="form-horizontal">
 			<input type="file" name="image"><br />
-			<input type="submit" name="submit" value="Senden">
+			<input type="submit" name="submit" value="Senden" class="btn btn-success">
 		</form>
 	</div>
 </body>

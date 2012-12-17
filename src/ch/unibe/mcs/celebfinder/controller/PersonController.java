@@ -3,6 +3,7 @@ package ch.unibe.mcs.celebfinder.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jdo.FetchGroup;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
@@ -29,6 +30,7 @@ public class PersonController {
 	private static List<Person> getAllPersons() {
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
+		pm.getFetchPlan().setGroup(FetchGroup.ALL);
 		try {
 			Query q = pm.newQuery(Person.class);
 			List<Person> persons = (List<Person>) q.execute();
@@ -37,15 +39,34 @@ public class PersonController {
 			pm.close();
 		}
 	}
+	
+	public static Person getPersonFromName(String name){
+		List<Person> persons = getAllPersons();
+		for (Person person : persons) {
+			if (person.toString().equals(name)) {
+				return person;
+			}
+		}
+		return null;
+		
+	}
 
 	public static Person getPersonFromID(long id) {
-
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-		try {
-			Person person = pm.getObjectById(Person.class, id);
-			return person;
-		} finally {
-			pm.close();
+		List<Person> persons = getAllPersons();
+		for (Person person : persons) {
+			if (person.getKey().getId() == id) {
+				return person;
+			}
 		}
+		return null;
+//		PersistenceManager pm = PMF.get().getPersistenceManager();
+//		pm.getFetchPlan().setGroup(FetchGroup.ALL);
+//		try {
+//			Person person = pm.getObjectById(Person.class, id);
+//			return person;
+//		} finally {
+//			pm.close();
+//		}
 	}
+	
 }

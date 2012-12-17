@@ -2,13 +2,7 @@
 
 <html>
 <head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-
-<link type="text/css" rel="stylesheet" href="CelebFinder.css">
-<title>Web Application Starter Project</title>
-
-<script type="text/javascript" language="javascript"
-	src="celebfinder/celebfinder.nocache.js"></script>
+<jsp:include page="/jsplib/header.jsp" />
 </head>
 
 <body>
@@ -18,9 +12,9 @@
 
 	<h1>CelebFinder</h1>
 	<div id="wrapper">
-		<div>Too bad, that wasn't right.</div>
-		<a href="/MainImageSelection.jsp">Try again!</a>
-		
+	<jsp:include page="/jsplib/navigation.jsp" />
+		<div class="alert alert-error">Too bad, that wasn't right.</div>
+		<a href="/MainImageSelection.jsp" class="btn">Try again!</a>
 	</div>
 </body>
 </html>

@@ -3,11 +3,12 @@ package ch.unibe.mcs.celebfinder.model;
 import com.google.appengine.api.datastore.Key;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
-@PersistenceCapable
+@PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class Candidate extends Model {
 
 	@PrimaryKey
@@ -53,8 +54,23 @@ public class Candidate extends Model {
 		this.suggestions = suggestions;
 	}
 
+	public void addSuggestion() {
+		this.suggestions++;
+	}
+
 	public Key getKey() {
 		return key;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Candidate) {
+			Candidate other = (Candidate) o;
+			return this.image.getKey().equals(other.getImage().getKey())
+					&& this.person.getKey().equals(other.person.getKey());
+		} else {
+			return false;
+		}
 	}
 
 }

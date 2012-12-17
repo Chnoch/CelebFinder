@@ -1,2 +1,0 @@
-serviceClass: ch.unibe.mcs.celebfinder.client.GreetingService
-path: CA87EBD085D99941A18CD4CFEE5BA9B2.gwt.rpc

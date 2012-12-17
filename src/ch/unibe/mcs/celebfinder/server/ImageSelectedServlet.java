@@ -15,15 +15,15 @@ public class ImageSelectedServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-		long imageKey = Long.parseLong(req.getParameter("key"));
-		long personKey = Long.parseLong(req.getParameter("personSelection"));
+		long imageKey = Long.parseLong(req.getParameter("imageKey"));
+		String personKey = req.getParameter("personSelection");
 		
 		// find desired image
 		CelebImage image = ImageController.getCelebImageFromID(imageKey);
-		Person person = PersonController.getPersonFromID(personKey);
+		Person person = PersonController.getPersonFromName(personKey);
 		
 		
-		if (image.getCandidates().contains(person)) {
+		if (image.addCandidate(person)) {
 			// success
 			resp.sendRedirect("/success.jsp");
 			
