@@ -38,6 +38,10 @@ h1 {
 	float:left;
 }
 
+.results-for {
+	padding-bottom: 10px;
+}
+
 .sendButton {
   display: block;
   font-size: 16pt;

@@ -22,13 +22,27 @@ public class Person extends Model {
 
 	@Persistent
 	private String lastName;
-
+	
+	@Persistent
+	private int suggestions;
+	
+	@Persistent
+	private CelebImage image;
+	
 	@Persistent
 	private URI link;
-
+	
 	public Person(String firstName, String lastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;
+		suggestions = 0;
+	}
+
+	public Person(CelebImage image, String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.image = image;
+		suggestions = 0;
 	}
 
 	public Person(String firstName, String lastName, URI link) {
@@ -63,6 +77,27 @@ public class Person extends Model {
 
 	public void setLink(URI mLink) {
 		this.link = mLink;
+	}
+
+
+	public int getSuggestions() {
+		return suggestions;
+	}
+
+	public void setSuggestions(int suggestions) {
+		this.suggestions = suggestions;
+	}
+	
+	public void addSuggestion() {
+		this.suggestions++;
+	}
+
+	public CelebImage getImage() {
+		return image;
+	}
+
+	public void setImage(CelebImage image) {
+		this.image = image;
 	}
 
 	@Override

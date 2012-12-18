@@ -33,21 +33,20 @@ public class SuggestNameServlet extends HttpServlet {
 			String lastname = req.getParameter("lastname");
 			long imageKey = Long.parseLong(req.getParameter("imageKey"));
 
-			List<Person> results = PersonController.getAvailablePerson(
-					firstname, lastname);
+//			List<Person> results = PersonController.getAvailablePerson(
+//					firstname, lastname);
+			Person person = new Person(firstname, lastname);
 			CelebImage image = pm.getObjectById(CelebImage.class, imageKey);
 
-			Person person;
-			if (results.isEmpty()) {
-				person = new Person(firstname, lastname);
-			} else {
-				person = results.iterator().next();
-			}
-			Candidate candidate = new Candidate(image, person);
+//			Person person;
+//			if (results.isEmpty()) {
+//				person = new Person(firstname, lastname);
+//			} else {
+//				person = results.iterator().next();
+//			}
 			image.addCandidate(person);
 
 			person.save();
-			candidate.save();
 			image.save();
 
 			if (user != null)

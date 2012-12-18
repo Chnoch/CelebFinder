@@ -21,13 +21,13 @@
 			if (session.getAttribute("user") != null) {
 		%>
 		<div class="alert alert-info">
-			Welcome back,
-			<%=((User) session.getAttribute("user")).getNickname()%></div>
+			Hello,
+			<%=((User) session.getAttribute("user")).getNickname()%>. You currently have <%=UserController.getCelebUserFromAuth((User) session.getAttribute("user")).getScore() %> points.</div>
 		<%
 			}
 		%>
-		<div>Welcome to CelebFinder! Text what this is about! Login and
-			start.</div>
+		<div>Welcome to CelebFinder! Show your knowledge of yesterday's, today's and tomorrow's celebrities by climbing the top of the high score. Simply log in with your Google Account and start collecting points. You can get 10 points for successfully uploading an image of a celebrity with their name. If you play the game you can get a point for every correct answer.
+		Let the fun begin!</div>
 		<div class="highscore">
 			<h2>Highscore</h2>
 			<table class="table table-bordered">

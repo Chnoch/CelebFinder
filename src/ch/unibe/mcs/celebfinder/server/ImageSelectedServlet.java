@@ -20,11 +20,13 @@ public class ImageSelectedServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		long imageKey = Long.parseLong(req.getParameter("imageKey"));
-		String personKey = req.getParameter("personSelection");
+		String personName = req.getParameter("personSelection");
 
 		// find desired image
 		CelebImage image = ImageController.getCelebImageFromID(imageKey);
-		Person person = PersonController.getPersonFromName(personKey);
+//		Person person = PersonController.getPersonFromName(personKey);
+		String[] personNameArray = personName.split(" ");
+		Person person = new Person(personNameArray[0], personNameArray[1]);
 		CelebUser user = UserController.getCelebUserFromAuth((User) req
 				.getSession().getAttribute("user"));
 

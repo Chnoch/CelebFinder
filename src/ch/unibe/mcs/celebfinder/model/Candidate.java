@@ -9,18 +9,17 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
-@PersistenceCapable(identityType = IdentityType.APPLICATION, detachable="true")
+@PersistenceCapable(detachable="true")
 public class Candidate extends Model {
 
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private Key key;
-
+	
 	@Persistent
 	private CelebImage image;
 
 	@Persistent
-	@Unowned
 	private Person person;
 
 	@Persistent
@@ -30,14 +29,6 @@ public class Candidate extends Model {
 		this.image = image;
 		this.person = person;
 		suggestions = 1;
-	}
-
-	public CelebImage getImage() {
-		return image;
-	}
-
-	public void setImage(CelebImage image) {
-		this.image = image;
 	}
 
 	public Person getPerson() {
@@ -64,12 +55,19 @@ public class Candidate extends Model {
 		return key;
 	}
 
+	public CelebImage getImage() {
+		return image;
+	}
+
+	public void setImage(CelebImage image) {
+		this.image = image;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof Candidate) {
 			Candidate other = (Candidate) o;
-			return this.image.getKey().equals(other.getImage().getKey())
-					&& this.person.getKey().equals(other.person.getKey());
+			return this.person.getKey().equals(other.person.getKey()) && this.getSuggestions()==other.getSuggestions();
 		} else {
 			return false;
 		}

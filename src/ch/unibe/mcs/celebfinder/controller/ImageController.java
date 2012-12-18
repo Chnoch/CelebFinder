@@ -3,6 +3,7 @@ package ch.unibe.mcs.celebfinder.controller;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.jdo.Extent;
 import javax.jdo.FetchGroup;
@@ -57,7 +58,7 @@ public class ImageController {
 		return image.getImage();
 	}
 
-	public static List<Candidate> getNamesFromID(long id) {
+	public static Set<Person> getNamesFromID(long id) {
 		CelebImage image = getCelebImageFromID(id);
 		return image.getCandidates();
 	}
@@ -66,8 +67,8 @@ public class ImageController {
 		CelebImage image = getCelebImageFromID(id);
 		List<Person> persons = new ArrayList<Person>();
 		if (image.getCandidates() != null) {
-			for (Candidate candidate : image.getCandidates()) {
-				persons.add(candidate.getPerson());
+			for (Person candidate : image.getCandidates()) {
+				persons.add(candidate);
 			}
 		}
 		return persons;

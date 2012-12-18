@@ -24,7 +24,6 @@ public class PersonController {
 		}
 	}
 
-
 	public static List<Person> getRandomPersons(int num, List<Person> forbidden) {
 		List<Person> persons = getAllPersons();
 		List<Person> candidates = new ArrayList<Person>();
@@ -62,6 +61,17 @@ public class PersonController {
 		}
 		return null;
 		
+	}
+	
+	public static List<Person> getAllPersonsFromName(String name) {
+		List<Person> result = new ArrayList<Person>();
+		List<Person> persons = getAllPersons();
+		for (Person person : persons) {
+			if (person.toString().equals(name)) {
+				result.add(person);
+			}
+		}
+		return result;
 	}
 
 	public static Person getPersonFromID(long id) {

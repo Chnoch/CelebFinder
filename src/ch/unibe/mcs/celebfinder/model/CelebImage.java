@@ -1,7 +1,9 @@
 package ch.unibe.mcs.celebfinder.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import ch.unibe.mcs.celebfinder.controller.UserController;
 
@@ -15,7 +17,7 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
-@PersistenceCapable(identityType = IdentityType.APPLICATION, detachable = "true")
+@PersistenceCapable(detachable="true")
 public class CelebImage extends Model {
 
 	@PrimaryKey
@@ -25,15 +27,15 @@ public class CelebImage extends Model {
 	@Persistent
 	private Blob image;
 
-	@Persistent(mappedBy = "image")
-	private List<Candidate> candidates;
+	@Persistent(mappedBy="image")
+	private Set<Person> candidates;
 
 	@Persistent
 	private Person confirmedPerson;
 
 	public CelebImage(Blob image) {
 		this.image = image;
-		this.candidates = new ArrayList<Candidate>();
+		this.candidates = new HashSet<Person>();
 	}
 
 	/**
@@ -48,22 +50,20 @@ public class CelebImage extends Model {
 		int highestScore = 0;
 		boolean found = false;
 		boolean createNew = true;
-		Candidate selectedCandidate = null;
+		Person selectedCandidate = null;
 		if (this.candidates == null) {
-			this.candidates = new ArrayList<Candidate>();
+			this.candidates = new HashSet<Person>();
 			createNew = false;
 		}
 
-		for (Candidate candidate : this.candidates) {
+		for (Person candidate : this.candidates) {
 			if (candidate.getSuggestions() > highestScore) {
 				highestScore = candidate.getSuggestions();
 			}
-			if (candidate.getPerson() != null) {
-				if (candidate.getPerson().equals(person)) {
+			if (candidate != null) {
+				if (candidate.equals(person)) {
 					candidate.addSuggestion();
-					person.save();
 					candidate.save();
-					this.save();
 					found = true;
 					selectedCandidate = candidate;
 				}
@@ -79,11 +79,9 @@ public class CelebImage extends Model {
 		}
 
 		if (createNew) {
-			Candidate candidate = new Candidate(this, person);
-
-			candidates.add(candidate);
-			person.save();
-			candidate.save();
+			person.setImage(this);
+			candidates.add(person);
+//			candidate.save();
 			this.save();
 		}
 		return false;
@@ -125,7 +123,7 @@ public class CelebImage extends Model {
 		return key;
 	}
 
-	public List<Candidate> getCandidates() {
+	public Set<Person> getCandidates() {
 		return candidates;
 	}
 

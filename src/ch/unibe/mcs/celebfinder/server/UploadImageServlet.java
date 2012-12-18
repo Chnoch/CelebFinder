@@ -55,6 +55,7 @@ public class UploadImageServlet extends HttpServlet {
 					.getSession().getAttribute("user"));
 			if (user != null)
 				user.addScore(5);
+			
 			// Redirect to suggest name form
 			req.setAttribute("imageKey", image.getKey().getId());
 			req.getRequestDispatcher("SuggestNameForm.jsp").forward(req, resp);
