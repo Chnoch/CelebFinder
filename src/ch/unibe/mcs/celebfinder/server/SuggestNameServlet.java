@@ -52,14 +52,14 @@ public class SuggestNameServlet extends HttpServlet {
 		// person = results.iterator().next();
 		// }
 
-		if (image != null && person != null) {
+//		if (image != null && person != null) {
 			image.addCandidate(person);
 			person.save();
 			image.save();
 
 			if (user != null)
 				user.addScore(5);
-		}
+//		} 
 		// respond to query
 		resp.sendRedirect("/UploadImageForm.jsp");
 	}

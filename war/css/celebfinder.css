@@ -5,37 +5,37 @@ body {
 
 /** Example rules used by the template application (remove for your app) */
 h1 {
-  font-size: 2em;
-  font-weight: bold;
-  color: #777777;
-  margin: 40px 0px 70px;
-  text-align: center;
+	font-size: 2em;
+	font-weight: bold;
+	color: #777777;
+	margin: 40px 0px 70px;
+	text-align: center;
 }
 
 #wrapper {
-	width:960px;
-	min-height:600px;
-	margin-left:auto;
-	margin-right:auto;
-	border:2px solid;
-	border-radius:5px;
-	padding:25px;
+	width: 960px;
+	min-height: 600px;
+	margin-left: auto;
+	margin-right: auto;
+	border: 2px solid;
+	border-radius: 5px;
+	padding: 25px;
 }
 
 .image {
-	padding-right:30px;
-	float:left;
+	padding-right: 30px;
+	float: left;
 }
 
 .navigation {
-	margin-left:auto;
-	margin-right:auto;
-	width:570px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 570px;
 	padding-bottom: 20px;
 }
 
 .name-form {
-	float:left;
+	float: left;
 }
 
 .results-for {
@@ -43,13 +43,28 @@ h1 {
 }
 
 .sendButton {
-  display: block;
-  font-size: 16pt;
+	display: block;
+	font-size: 16pt;
+}
+
+#social {
+	margin: 10px;
+	float: right;
+}
+
+div .plusone,.twitter,.fb-like {
+	overflow: hidden;
+	float: left;
+}
+
+<!--
+div .fb_reset {
+	display: inline;
 }
 
 /** Most GWT widgets already have a style name defined */
 .gwt-DialogBox {
-  width: 400px;
+	width: 400px;
 }
 
 #imageContainer {
@@ -67,16 +82,14 @@ h1 {
 }
 
 .dialogVPanel {
-  margin: 5px;
+	margin: 5px;
 }
 
 .serverResponseLabelError {
-  color: red;
+	color: red;
 }
 
 /** Set ids using widget.getElement().setId("idOfElement") */
 #closeButton {
-  margin: 15px 6px 6px;
+	margin: 15px 6px 6px;
 }
-
-

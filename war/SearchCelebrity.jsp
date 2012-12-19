@@ -36,14 +36,17 @@
 			<div class="results-for">Results for <i><%=request.getParameter("name") %></i></div> 
 					<%String name = request.getParameter("name");
 					List<Person> persons = PersonController.getAllPersonsFromName(name);
+					if (persons != null) {
+					for (Person person : persons) {
+						if (person.getImage()!= null) {
+					%>
 					
-					for (Person person : persons) {%>
 						<div class="image">
 							<img src="/getImage?key=<%=person.getImage().getKey().getId()%>"
 								height="480" width="320" class="img-polaroid" />
 						</div>
 			
-			<% }} %>
+			<% }}}} %>
 			</div>
 	</div>
 </body>

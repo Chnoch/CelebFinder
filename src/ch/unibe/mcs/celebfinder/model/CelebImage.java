@@ -53,7 +53,6 @@ public class CelebImage extends Model {
 		Person selectedCandidate = null;
 		if (this.candidates == null) {
 			this.candidates = new HashSet<Person>();
-			createNew = false;
 		}
 
 		for (Person candidate : this.candidates) {
@@ -66,6 +65,7 @@ public class CelebImage extends Model {
 //					candidate.save();
 					found = true;
 					selectedCandidate = candidate;
+					createNew = false;
 				}
 			}
 		}

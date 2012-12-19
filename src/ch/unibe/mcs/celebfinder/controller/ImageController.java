@@ -35,16 +35,16 @@ public class ImageController {
 
 			CelebImage image;
 			boolean done = true;
-			do {
+//			do {
 				done = true;
 				int index = (int) (Math.random() * (double) images.size());
 				image = images.get(index);
-				if (image.getCandidates() == null) {
-					done = false;
-				} else if (image.getCandidates().size() == 0) {
-					done = false;
-				}
-			} while (!done);
+//				if (image.getCandidates() == null) {
+//					done = false;
+//				} else if (image.getCandidates().size() == 0) {
+//					done = false;
+//				}
+//			} while (!done);
 
 			return image.getKey().getId();
 		} finally {

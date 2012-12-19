@@ -32,6 +32,8 @@ public class ImageSelectedServlet extends HttpServlet {
 
 		try {
 			if (image.addCandidate(person)) {
+				person.save();
+				image.save();
 				// success
 				if (user != null)
 					user.addScore(1);
