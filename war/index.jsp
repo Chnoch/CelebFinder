@@ -26,7 +26,7 @@
 		<%
 			}
 		%>
-		<div>Welcome to CelebFinder! Show your knowledge of yesterday's, today's and tomorrow's celebrities by climbing the top of the high score. Simply log in with your Google Account and start collecting points. You can get 10 points for successfully uploading an image of a celebrity with their name. If you play the game you can get a point for every correct answer.
+		<div>Welcome to <b>CelebFinder</b>! Show your knowledge of yesterday's, today's and tomorrow's celebrities by climbing the top of the high score. <b>Simply log in with your Google Account and start collecting points.</b> You can get <b>10 points</b> for successfully uploading an image of a celebrity with their name. If you play the game you can get <b>1 point</b> for every correct answer.
 		Let the fun begin!</div>
 		<div class="highscore">
 			<h2>Highscore</h2>

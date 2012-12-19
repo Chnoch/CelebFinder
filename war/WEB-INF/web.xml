@@ -23,6 +23,16 @@
   </servlet-mapping>
   
   <servlet>
+    <servlet-name>newNameSuggestion</servlet-name>
+    <servlet-class>ch.unibe.mcs.celebfinder.server.NewNameSuggestionServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>newNameSuggestion</servlet-name>
+    <url-pattern>/newNameSuggestion</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>getImage</servlet-name>
     <servlet-class>ch.unibe.mcs.celebfinder.server.GetImageServlet</servlet-class>
   </servlet>

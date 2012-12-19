@@ -63,7 +63,7 @@ public class CelebImage extends Model {
 			if (candidate != null) {
 				if (candidate.equals(person)) {
 					candidate.addSuggestion();
-					candidate.save();
+//					candidate.save();
 					found = true;
 					selectedCandidate = candidate;
 				}
@@ -82,7 +82,7 @@ public class CelebImage extends Model {
 			person.setImage(this);
 			candidates.add(person);
 //			candidate.save();
-			this.save();
+			return true;
 		}
 		return false;
 	}

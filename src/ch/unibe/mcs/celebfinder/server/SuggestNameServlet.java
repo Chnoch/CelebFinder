@@ -23,40 +23,45 @@ public class SuggestNameServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
+
+		CelebImage image;
+		Person person;
+		CelebUser user;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		try {
-			CelebUser user = UserController.getCelebUserFromAuth((User) req
-					.getSession().getAttribute("user"));
-			
+			user = UserController.getCelebUserFromAuth((User) req.getSession()
+					.getAttribute("user"));
+
 			// Get the image representation
 			String firstname = req.getParameter("firstname");
 			String lastname = req.getParameter("lastname");
 			long imageKey = Long.parseLong(req.getParameter("imageKey"));
 
-//			List<Person> results = PersonController.getAvailablePerson(
-//					firstname, lastname);
-			Person person = new Person(firstname, lastname);
-			CelebImage image = pm.getObjectById(CelebImage.class, imageKey);
+			// List<Person> results = PersonController.getAvailablePerson(
+			// firstname, lastname);
+			person = new Person(firstname, lastname);
+			image = pm.getObjectById(CelebImage.class, imageKey);
+		} finally {
+			pm.close();
+		}
 
-//			Person person;
-//			if (results.isEmpty()) {
-//				person = new Person(firstname, lastname);
-//			} else {
-//				person = results.iterator().next();
-//			}
+		// Person person;
+		// if (results.isEmpty()) {
+		// person = new Person(firstname, lastname);
+		// } else {
+		// person = results.iterator().next();
+		// }
+
+		if (image != null && person != null) {
 			image.addCandidate(person);
-
 			person.save();
 			image.save();
 
 			if (user != null)
 				user.addScore(5);
-
-			// respond to query
-			resp.sendRedirect("/UploadImageForm.jsp");
-		} finally {
-			pm.close();
 		}
+		// respond to query
+		resp.sendRedirect("/UploadImageForm.jsp");
 	}
 
 }

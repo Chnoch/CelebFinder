@@ -24,24 +24,29 @@ public class ImageSelectedServlet extends HttpServlet {
 
 		// find desired image
 		CelebImage image = ImageController.getCelebImageFromID(imageKey);
-//		Person person = PersonController.getPersonFromName(personKey);
+		// Person person = PersonController.getPersonFromName(personKey);
 		String[] personNameArray = personName.split(" ");
 		Person person = new Person(personNameArray[0], personNameArray[1]);
 		CelebUser user = UserController.getCelebUserFromAuth((User) req
 				.getSession().getAttribute("user"));
 
-		if (image.addCandidate(person)) {
-			// success
-			if (user != null)
-				user.addScore(1);
+		try {
+			if (image.addCandidate(person)) {
+				// success
+				if (user != null)
+					user.addScore(1);
 
-			resp.sendRedirect("/success.jsp");
+				req.setAttribute("success", true);
+				req.getRequestDispatcher("MainImageSelection.jsp").forward(req,
+						resp);
+			} else {
+				// failure
+				req.setAttribute("success", false);
+				req.getRequestDispatcher("MainImageSelection.jsp").forward(req,
+						resp);
+			}
+		} catch (Exception e) {
 
-		} else {
-			// failure
-			resp.sendRedirect("/failure.jsp");
 		}
-
-		// find desired person
 	}
 }

@@ -17,7 +17,8 @@
 	<%
 		long imageId = ImageController.getRandomImageID();
 
-		List<Person> persons = ImageController.getCandidatePersonsFromID(imageId);
+		List<Person> persons = ImageController
+				.getCandidatePersonsFromID(imageId);
 		List<Person> wrongPersons = PersonController.getRandomPersons(
 				4 - persons.size(), persons);
 
@@ -35,7 +36,24 @@
 	<h1>CelebFinder</h1>
 	<jsp:include page="/jsplib/navigation.jsp" />
 	<div id="wrapper">
+		<%
+			if (request.getAttribute("success") != null) {
+				if ((Boolean) request.getAttribute("success")) {
+		%>
+		<div class="alert alert-success">Congratulations, you were
+			right! Try again!</div>
+		<%
+			} else {
+		%>
+		<div class="alert alert-error">Too bad, that was wrong! Try
+			again!</div>
+
+		<%
+			}
+			} else {
+		%>
 		<div class="alert alert-info">Who is this?</div>
+		<% } %>
 		<div class="image">
 			<img src="/getImage?key=<%=imageId%>" height="480" width="320"
 				class="img-polaroid" />
@@ -61,6 +79,10 @@
 				<button type="submit" class="btn btn-success">Submit</button>
 			</fieldset>
 		</form>
+		<div class="suggest-name">
+			<a href="/newNameSuggestion?imageKey=<%=imageId%>" class="btn">Suggest
+				a Different Person</a>
+		</div>
 	</div>
 </body>
 </html>
